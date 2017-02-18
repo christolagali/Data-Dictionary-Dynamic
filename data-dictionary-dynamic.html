@@ -1,0 +1,294 @@
+<script src="js/jquery-1.4.4.min.js" type="text/javascript"></script>
+<script src="js/jquery.min.js" type="text/javascript"></script>
+<script src="js/jquery.google.spreadsheet.js" type="text/javascript"></script>
+<script src="js/jquery-json-divide.js" type="text/javascript"></script>
+<script type="text/javascript">// <![CDATA[
+$(document).ready(function(){
+        
+        var key = '1-augBpn2ssPGpw8zRci4bM5AE571bcsMYIfaMc0nEG8&amp;';
+        var url = "https://docs.google.com/spreadsheet/pub?key="+ key + "output=html";
+	    var googleSpreadsheet = new GoogleSpreadsheet();
+        googleSpreadsheet.url(url);
+        googleSpreadsheet.load(function(result) {
+		
+		    console.log(result);
+		    var obj = jQuery.parseJSON(JSON.stringify(result));
+		    partitionJson(obj);
+		    
+	    });
+    
+	    
+
+	    //toggle div visibility containing tables as we click the A-C menu items
+        //$('#div-a-c').toggle('slow');
+        //$('#div-a-c').hide();
+        
+	    $('#bold-a-c').click(function(){
+		    $('#div-a-c').toggle('slow');
+            $('#div-d-f').hide();
+            $('#div-g-i').hide();
+            $('#div-j-l').hide();
+            $('#div-m-o').hide();
+            $('#div-p-r').hide();
+            $('#div-s-u').hide();
+            $('#div-v-x').hide();
+            $('#div-y-z').hide();
+	    });
+        //$('#div-d-f').toggle('slow');
+        $('#div-d-f').hide();
+	    $('#bold-d-f').click(function(){
+		    $('#div-d-f').toggle('slow');
+            $('#div-a-c').hide();
+            $('#div-g-i').hide();
+            $('#div-j-l').hide();
+            $('#div-m-o').hide();
+            $('#div-p-r').hide();
+            $('#div-s-u').hide();
+            $('#div-v-x').hide();
+            $('#div-y-z').hide();
+	    });
+	
+    //	$('#div-g-i').toggle('slow');
+	    $('#div-g-i').hide();
+	    $('#bold-g-i').click(function(){
+	    	$('#div-g-i').toggle('slow');
+            $('#div-a-c').hide();
+            $('#div-d-f').hide();
+            $('#div-j-l').hide();
+            $('#div-m-o').hide();
+            $('#div-p-r').hide();
+            $('#div-s-u').hide();
+            $('#div-v-x').hide();
+            $('#div-y-z').hide();
+	    });
+	
+	   // $('#div-j-l').toggle('slow');
+	    $('#div-j-l').hide();
+	    $('#bold-j-l').click(function(){
+		    $('#div-j-l').toggle('slow');
+            $('#div-a-c').hide();
+            $('#div-d-f').hide();
+            $('#div-g-i').hide();
+            $('#div-m-o').hide();
+            $('#div-p-r').hide();
+            $('#div-s-u').hide();
+            $('#div-v-x').hide();
+            $('#div-y-z').hide();
+	    });
+	
+	    //$('#div-m-o').toggle('slow');
+	    $('#div-m-o').hide();
+	    $('#bold-m-o').click(function(){
+		    $('#div-m-o').toggle('slow');
+            $('#div-a-c').hide();
+            $('#div-d-f').hide();
+            $('#div-g-i').hide();
+            $('#div-j-l').hide();
+            $('#div-p-r').hide();
+            $('#div-s-u').hide();
+            $('#div-v-x').hide();
+            $('#div-y-z').hide();
+	    });
+	
+	   // $('#div-p-r').toggle('slow');
+	    $('#div-p-r').hide();
+	    $('#bold-p-r').click(function(){
+		    $('#div-p-r').toggle('slow');
+            $('#div-a-c').hide();
+            $('#div-d-f').hide();
+            $('#div-g-i').hide();
+            $('#div-j-l').hide();
+            $('#div-m-o').hide();
+            $('#div-s-u').hide();
+            $('#div-v-x').hide();
+            $('#div-y-z').hide();
+	    });
+	
+	   // $('#div-s-u').toggle('slow');
+	    $('#div-s-u').hide();
+	    $('#bold-s-u').click(function(){
+		    $('#div-s-u').toggle('slow');
+            $('#div-a-c').hide();
+            $('#div-d-f').hide();
+            $('#div-g-i').hide();
+            $('#div-j-l').hide();
+            $('#div-m-o').hide();
+            $('#div-p-r').hide();
+            $('#div-v-x').hide();
+            $('#div-y-z').hide();
+	    });
+	
+	   // $('#div-v-x').toggle('slow');
+	    $('#div-v-x').hide();
+	    $('#bold-v-x').click(function(){
+		    $('#div-v-x').toggle('slow');
+            $('#div-a-c').hide();
+            $('#div-d-f').hide();
+            $('#div-g-i').hide();
+            $('#div-j-l').hide();
+            $('#div-m-o').hide();
+            $('#div-p-r').hide();
+            $('#div-s-u').hide();
+            $('#div-y-z').hide();
+	    });
+	
+	   // $('#div-y-z').toggle('slow');
+	    $('#div-y-z').hide();
+	    $('#bold-y-z').click(function(){
+		    $('#div-y-z').toggle('slow');
+            $('#div-a-c').hide();
+            $('#div-d-f').hide();
+            $('#div-g-i').hide();
+            $('#div-j-l').hide();
+            $('#div-m-o').hide();
+            $('#div-p-r').hide();
+            $('#div-s-u').hide();
+            $('#div-v-x').hide();
+	    });
+        
+        //toggle td visibility containing description and examples on + click
+        //The elements are slidup in the jquery-json-divide.js file
+        // we now need to slide down these elements on click
+        
+        $(document).delegate('img','click',function(){
+            var id = $(this).attr('id');
+    		var id_no = $(this).attr('id').substring(15);
+		    //alert('Click me  ' + id + '  with id no  ' + id_no);
+			var id_div = '#tr-hideme' + id_no;
+			//alert(id_div);
+            
+            //make variable for + and -
+            var toggle_id = id_no;
+            
+			$(id_div).toggle('slow');
+            var id_img = '#toggleIconImage' + id_no;
+            $(id_img).toggleClass("changeicon");
+        });
+        
+        //Delegating rollover event to img
+        $(document).delegate('img','mouseover',function(){
+            var id = $(this).attr('id');
+        	var id_no = $(this).attr('id').substring(15);
+		    //alert('Click me  ' + id + '  with id no  ' + id_no);
+			var id_div = '#tr-hideme' + id_no;
+			//alert(id_div);
+            var id_img = '#toggleIconImage' + id_no;
+			$(id_img).addClass("rotate");
+        });
+        
+        $(document).delegate('img','mouseleave',function(){
+            var id = $(this).attr('id');
+            var id_no = $(this).attr('id').substring(15);
+            var id_img = '#toggleIconImage' + id_no;
+            //alert(id_img);
+			$(id_img).removeClass("rotate");
+        });
+    });
+// ]]></script>
+<style><!--
+b{
+    cursor:pointer;
+    font-size:14px;
+}
+
+#toggleIconImage1{
+   
+    margin :0;
+}
+
+td.mytd.first{
+    display :block;
+    width:40px;
+    height:20px;
+}
+
+img {
+    -webkit-transition: -webkit-transform 0.5s ease-in-out;
+	-moz-transition: -moz-transform 0.5s ease-in-out;
+	-ms-transition: -ms-transform 0.5s ease-in-out;
+	-o-transition: -o-transform 0.5s ease-in-out;
+	transition: transform 0.5s ease-in-out;
+}
+
+.rotate {
+    -webkit-transform: rotate(90deg);
+	-moz-transform: rotate(90deg);
+	-ms-transform: rotate(90deg);
+	-o-transform: rotate(90deg);
+	transform: rotate(90deg);
+}
+
+.highlight{
+    border:3px solid Red;
+}
+
+.changeicon{
+    content: url('images/minus-sign.png');
+}
+--></style>
+<h1>Data Dictionary</h1>
+<div id="json"><b id="bold-a-c">A-C</b> &#160;&#160;&#160;<b id="bold-d-f">D-F</b>&#160;&#160;&#160;<b id="bold-g-i">G-I</b>&#160;&#160;&#160;<b id="bold-j-l">J-L</b> &#160;&#160;&#160;<b id="bold-m-o">M-O</b>&#160;&#160;&#160;<b id="bold-p-r">P-R</b>&#160;&#160;&#160;<b id="bold-s-u">S-U</b>&#160;&#160;&#160;<b id="bold-v-x">V-X</b>&#160;&#160;&#160;<b id="bold-y-z">Y-Z</b></div>
+<br />
+<div id="div-a-c">
+<table id="div-a-c-table" summary="Table for Items between A and C">
+<tbody>
+<tr><th width="1%">&#160;</th><th width="25%">Name</th><th width="25%">Used In</th><th>Description</th></tr>
+</tbody>
+</table>
+</div>
+<div id="div-d-f">
+<table id="div-d-f-table" summary="Table for Items between D and F">
+<tbody>
+<tr><th width="1%">&#160;</th><th width="25%">Name</th><th width="25%">Used In</th><th>Description</th></tr>
+</tbody>
+</table>
+</div>
+<div id="div-g-i">
+<table id="div-g-i-table" summary="Table for Items between G and I">
+<tbody>
+<tr><th width="1%">&#160;</th><th width="25%">Name</th><th width="25%">Used In</th><th>Description</th></tr>
+</tbody>
+</table>
+</div>
+<div id="div-j-l">
+<table id="div-j-l-table" summary="Table for Items between J and L">
+<tbody>
+<tr><th width="1%">&#160;</th><th width="25%">Name</th><th width="25%">Used In</th><th>Description</th></tr>
+</tbody>
+</table>
+</div>
+<div id="div-m-o">
+<table id="div-m-o-table" summary="Table for Items between M and O">
+<tbody>
+<tr><th width="1%">&#160;</th><th width="25%">Name</th><th width="25%">Used In</th><th>Description</th></tr>
+</tbody>
+</table>
+</div>
+<div id="div-p-r">
+<table id="div-p-r-table" summary="Table for Items between P and R">
+<tbody>
+<tr><th width="1%">&#160;</th><th width="25%">Name</th><th width="25%">Used In</th><th>Description</th></tr>
+</tbody>
+</table>
+</div>
+<div id="div-s-u">
+<table id="div-s-u-table" summary="Table for Items between S and U">
+<tbody>
+<tr><th width="1%">&#160;</th><th width="25%">Name</th><th width="25%">Used In</th><th>Description</th></tr>
+</tbody>
+</table>
+</div>
+<div id="div-v-x">
+<table id="div-v-x-table" summary="Table for Items between V and X">
+<tbody>
+<tr><th width="1%">&#160;</th><th width="25%">Name</th><th width="25%">Used In</th><th>Description</th></tr>
+</tbody>
+</table>
+</div>
+<div id="div-y-z">
+<table id="div-y-z-table" summary="Table for Items between Y and Z">
+<tbody>
+<tr><th width="1%">&#160;</th><th width="25%">Name</th><th width="25%">Used In</th><th>Description</th></tr>
+</tbody>
+</table>
+</div>
